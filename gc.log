@@ -1,0 +1,34 @@
+Java HotSpot(TM) 64-Bit Server VM (25.60-b23) for windows-amd64 JRE (1.8.0_60-b27), built on Aug  4 2015 11:06:27 by "java_re" with MS VC++ 10.0 (VS2010)
+Memory: 4k page, physical 8077444k(2833084k free), swap 16153032k(10262388k free)
+CommandLine flags: -XX:+HeapDumpOnOutOfMemoryError -XX:InitialHeapSize=10485760 -XX:MaxHeapSize=20971520 -XX:+PrintGC -XX:+PrintGCDateStamps -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintHeapAtGC -XX:+PrintTenuringDistribution -XX:+UseCompressedClassPointers -XX:+UseCompressedOops -XX:-UseLargePagesIndividualAllocation -XX:+UseParallelGC 
+{Heap before GC invocations=1 (full 0):
+ PSYoungGen      total 2560K, used 2048K [0x00000000ff980000, 0x00000000ffc80000, 0x0000000100000000)
+  eden space 2048K, 100% used [0x00000000ff980000,0x00000000ffb80000,0x00000000ffb80000)
+  from space 512K, 0% used [0x00000000ffc00000,0x00000000ffc00000,0x00000000ffc80000)
+  to   space 512K, 0% used [0x00000000ffb80000,0x00000000ffb80000,0x00000000ffc00000)
+ ParOldGen       total 7168K, used 0K [0x00000000fec00000, 0x00000000ff300000, 0x00000000ff980000)
+  object space 7168K, 0% used [0x00000000fec00000,0x00000000fec00000,0x00000000ff300000)
+ Metaspace       used 2998K, capacity 4588K, committed 4864K, reserved 1056768K
+  class space    used 329K, capacity 424K, committed 512K, reserved 1048576K
+2015-11-03T14:23:07.836+0800: 0.331: [GC (Allocation Failure) 
+Desired survivor size 524288 bytes, new threshold 7 (max 15)
+[PSYoungGen: 2048K->504K(2560K)] 2048K->872K(9728K), 0.0029452 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Heap after GC invocations=1 (full 0):
+ PSYoungGen      total 2560K, used 504K [0x00000000ff980000, 0x00000000ffc80000, 0x0000000100000000)
+  eden space 2048K, 0% used [0x00000000ff980000,0x00000000ff980000,0x00000000ffb80000)
+  from space 512K, 98% used [0x00000000ffb80000,0x00000000ffbfe030,0x00000000ffc00000)
+  to   space 512K, 0% used [0x00000000ffc00000,0x00000000ffc00000,0x00000000ffc80000)
+ ParOldGen       total 7168K, used 368K [0x00000000fec00000, 0x00000000ff300000, 0x00000000ff980000)
+  object space 7168K, 5% used [0x00000000fec00000,0x00000000fec5c2c0,0x00000000ff300000)
+ Metaspace       used 2998K, capacity 4588K, committed 4864K, reserved 1056768K
+  class space    used 329K, capacity 424K, committed 512K, reserved 1048576K
+}
+Heap
+ PSYoungGen      total 2560K, used 2528K [0x00000000ff980000, 0x00000000ffc80000, 0x0000000100000000)
+  eden space 2048K, 98% used [0x00000000ff980000,0x00000000ffb7a2e0,0x00000000ffb80000)
+  from space 512K, 98% used [0x00000000ffb80000,0x00000000ffbfe030,0x00000000ffc00000)
+  to   space 512K, 0% used [0x00000000ffc00000,0x00000000ffc00000,0x00000000ffc80000)
+ ParOldGen       total 7168K, used 368K [0x00000000fec00000, 0x00000000ff300000, 0x00000000ff980000)
+  object space 7168K, 5% used [0x00000000fec00000,0x00000000fec5c2c0,0x00000000ff300000)
+ Metaspace       used 4455K, capacity 4990K, committed 5248K, reserved 1056768K
+  class space    used 517K, capacity 562K, committed 640K, reserved 1048576K
