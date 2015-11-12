@@ -11,7 +11,10 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
 	</bean> -->
 	
 	
-	
+	<bean id="policyDAO" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.dingwang.dao.PolicyDTOMapper"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
 	<bean id="helloWorldService" class="com.dingwang.FactoryBean.Impl.HelloWorldServiceImpl"></bean>
 	
 	<bean id="capPlPolicyProcessor" class="com.dingwang.aop.Impl.GoodByeAopImpl"></bean>
