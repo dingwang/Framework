@@ -5,21 +5,36 @@
 http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-	<bean id="dataSource"
+	<!-- <bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName">
 			<value>com.mysql.jdbc.Driver</value>
 		</property>
 		<property name="url">
-			<value>jdbc:mysql://rdsuueafyuqbzfu.mysql.rds.aliyuncs.com:3306/policy_00
+			<value>${jdbc_url}
 			</value>
 		</property>
 		<property name="username">
-			<value>za_user</value>
+			<value>${jdbc_user}</value>
 		</property>
 		<property name="password">
-			<value>hello1234</value>
+			<value>${jdbc_password}</value>
 		</property>
+	</bean> -->
+	
+	<!-- 德鲁伊配置数据连接池 -->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+		 <property name="url" value="${jdbc_url}" />
+	     <property name="username" value="${jdbc_user}"/>
+	     <property name="password" value="${jdbc_password}" />
+	     <property name="maxActive" value="${maxActive}" />
+	     <!-- filters：统计监控信息，value是一个string,支持组合配置，如stat,log4j,那么问题来了，如果自定义的filter该如何配置呢，可以通过bean的形式添加 -->
+	     <property name="filters" value="${filters}" />
+	     <!-- <property name="proxyFilters">
+	     	<list>
+	     		<ref bean="stat-filter"/>
+	     	</list>
+	     </property> -->
 	</bean>
 
 	<bean id="transactionManager"
@@ -30,4 +45,10 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="mapperLocations" value="classpath:com/dingwang/mapping/*Mapper.xml"></property>
 	</bean>
+	
+	<!-- druid监控统计bean 对应上文dataSource中的proxyFilters -->
+	<!-- <bean id="stat-filter" class="com.alibaba.druid.filter.stat.StatFilter">
+		<property name="slowSqlMillis" value="10000" />
+    	<property name="logSlowSql" value="true" />
+	</bean> -->
 </beans>

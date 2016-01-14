@@ -22,7 +22,7 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	
 	
-	<bean id="testInit" class="com.dingwang.FactoryBean.Impl.TestInit" init-method="init"></bean>
+<!-- 	<bean id="testInit" class="com.dingwang.FactoryBean.Impl.TestInit" init-method="init"></bean> -->
 	<bean id="proxyHW" class="com.dingwang.FactoryBean.HWFactoryBean">
 		<property name="interfaceName" value="com.dingwang.FactoryBean.HelloWorldService"></property>
 		<property name="target" ref="helloWorldService"></property>

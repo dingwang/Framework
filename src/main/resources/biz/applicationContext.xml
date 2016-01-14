@@ -3,7 +3,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans.xsd">
-
-<import resource="persist.xml"/>
-<import resource="spring-bean.xml"/>
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+		lazy-init="false">
+		<property name="locations">
+			<list>
+				<value>classpath*:/config/config-dev.properties</value>
+			</list>
+		</property>
+	</bean>
+	<import resource="persist.xml" />
+	<import resource="spring-bean.xml" />
 </beans>
