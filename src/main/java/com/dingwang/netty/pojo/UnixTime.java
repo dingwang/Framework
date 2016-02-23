@@ -19,7 +19,8 @@ public class UnixTime {
     private int value;
 
     public UnixTime() {
-        this((int) (System.currentTimeMillis() / 1000L + 2208988800L));
+        //        this((int) (System.currentTimeMillis() / 1000L + 2208988800L));
+        this((int) new Date().getTime());
     }
 
     public UnixTime(int value) {
@@ -28,7 +29,7 @@ public class UnixTime {
 
     @Override
     public String toString() {
-        return new Date((this.value - 2208988800L) * 1000).toString();
+        return new Date(this.value).toString();
     }
 
     public int getValue() {

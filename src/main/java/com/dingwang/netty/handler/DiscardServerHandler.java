@@ -7,8 +7,6 @@
  */
 package com.dingwang.netty.handler;
 
-import com.dingwang.netty.pojo.UnixTime;
-
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerAdapter;
@@ -45,6 +43,7 @@ public class DiscardServerHandler extends ChannelHandlerAdapter {
         //对消息作出相应
         //ctx.write(Object)方法不会使消息写入到通道上，他被缓冲在了内部，你需要调用ctx.flush()方法来把缓冲区中数据
         //强行输出。或者你可以用更简洁的cxt.writeAndFlush(msg)以达到同样的目的。
+        System.out.println("server read" + msg.toString());
         ctx.writeAndFlush(msg);
     }
 
@@ -98,10 +97,10 @@ public class DiscardServerHandler extends ChannelHandlerAdapter {
         //
         //            }
         //        });
-
-        System.out.println("1111111111111111111");
-        ChannelFuture f = ctx.writeAndFlush(new UnixTime());
+        System.out.println("test idle");
+        ChannelFuture f = ctx.writeAndFlush("hhhh");
         f.addListener(ChannelFutureListener.CLOSE);
 
     }
+
 }

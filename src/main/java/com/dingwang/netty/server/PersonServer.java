@@ -7,8 +7,9 @@
  */
 package com.dingwang.netty.server;
 
-import com.dingwang.netty.encoder.TimeEncoder;
-import com.dingwang.netty.handler.DiscardServerHandler;
+import com.dingwang.netty.decoder.PersonDecoder;
+import com.dingwang.netty.encoder.PersonEncoder;
+import com.dingwang.netty.handler.PersonOutHandler;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -25,12 +26,12 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
  * 
  * @author wangding_91@163.com 2016年2月18日 下午3:08:27
  */
-public class DiscardServer {
+public class PersonServer {
 
     //监听端口
     private int port;
 
-    public DiscardServer(int port) {
+    public PersonServer(int port) {
         this.port = port;
     }
 
@@ -57,7 +58,7 @@ public class DiscardServer {
 
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
-                        ch.pipeline().addLast(new TimeEncoder(), new DiscardServerHandler());
+                        ch.pipeline().addLast(new PersonDecoder(), new PersonEncoder(), new PersonOutHandler());
 
                     }
                 })

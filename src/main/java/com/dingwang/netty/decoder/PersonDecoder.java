@@ -9,22 +9,19 @@ package com.dingwang.netty.decoder;
 
 import java.util.List;
 
-import com.dingwang.netty.pojo.UnixTime;
+import com.dingwang.netty.pojo.Person;
+import com.google.gson.Gson;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
 
 /**
- * 类TimeDecoder.java的实现描述：TODO 类实现描述
+ * 类PersonDecoder.java的实现描述：TODO 类实现描述
  * 
- * @author wangding_91@163.com 2016年2月18日 下午5:18:20
+ * @author wangding_91@163.com 2016年2月22日 上午11:46:32
  */
-public class TimeDecoder extends ByteToMessageDecoder {
-
-    static {
-        System.out.println("11111");
-    }
+public class PersonDecoder extends ByteToMessageDecoder {
 
     /*
      * (non-Javadoc)
@@ -34,13 +31,21 @@ public class TimeDecoder extends ByteToMessageDecoder {
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
 
-        System.out.println("==========decode");
-
-        if (in.readableBytes() < 4) {
+        if (in == null || in.readableBytes() <= 0) {
+            System.out.println("##################");
             return;
         }
+        byte[] src = new byte[in.readableBytes()];
 
-        out.add(new UnixTime(in.readInt()));
+        in.readBytes(src);
+
+        String message = new String(src, "UTF-8");
+
+        Person p = new Gson().fromJson(message, Person.class);
+
+        System.out.println("message======" + message);
+
+        out.add(p);
     }
 
 }

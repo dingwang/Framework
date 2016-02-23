@@ -9,7 +9,11 @@ package com.dingwang.netty;
 
 import org.junit.Test;
 
-import com.dingwang.netty.client.DiscardClient;
+import com.dingwang.netty.client.ChannelPool;
+import com.dingwang.netty.client.PersonClient;
+import com.dingwang.netty.pojo.Person;
+
+import io.netty.channel.Channel;
 
 /**
  * 类DiscardClientTest.java的实现描述：TODO 类实现描述
@@ -19,39 +23,28 @@ import com.dingwang.netty.client.DiscardClient;
 public class DiscardClientTest {
 
     @Test
-    public void start() {
+    public void start() throws InterruptedException {
         int port = 8080;
         String host = "localhost";
 
-        //        new DiscardClient(port, host).run();
-        for (int i = 0; i < 100; i++) {
-            new clientThread(port, host).start();
+        new PersonClient(port, host).run();
+
+        Channel channel = ChannelPool.getChannel();
+
+        for (int i = 0; i < 3; i++) {
+            Person p = new Person();
+            p.setAge(i);
+            p.setName("dw" + i);
+            channel.writeAndFlush(p);
+        }
+        try {
+            channel.closeFuture().sync();
+        } catch (InterruptedException e) {
+            channel.close();
         }
 
-        while (true) {
-
-        }
-    }
-
-    class clientThread extends Thread {
-
-        private int    port;
-
-        private String host;
-
-        public clientThread(int port, String host) {
-            this.port = port;
-            this.host = host;
-        }
-
-        /*
-         * (non-Javadoc)
-         * @see java.lang.Thread#run()
-         */
-        @Override
-        public void run() {
-            System.out.println(Thread.currentThread().getName());
-            new DiscardClient(port, host).run();
-        }
+        //        while (true) {
+        //
+        //        }
     }
 }

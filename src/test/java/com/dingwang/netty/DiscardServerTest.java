@@ -9,7 +9,7 @@ package com.dingwang.netty;
 
 import org.junit.Test;
 
-import com.dingwang.netty.server.DiscardServer;
+import com.dingwang.netty.server.PersonServer;
 
 /**
  * 类DiscardServerTest.java的实现描述：TODO 类实现描述
@@ -21,7 +21,7 @@ public class DiscardServerTest {
     @Test
     public void start() throws InterruptedException {
         int port = 8080;
-        new DiscardServer(port).run();
+        new PersonServer(port).run();
     }
 
 }

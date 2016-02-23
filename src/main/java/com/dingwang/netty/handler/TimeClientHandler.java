@@ -19,6 +19,10 @@ import io.netty.channel.ChannelHandlerContext;
  */
 public class TimeClientHandler extends ChannelHandlerAdapter {
 
+    static {
+        System.out.println("2222");
+    }
+
     /*
      * (non-Javadoc)
      * @see io.netty.channel.ChannelHandlerAdapter#channelRead(io.netty.channel.
@@ -26,6 +30,7 @@ public class TimeClientHandler extends ChannelHandlerAdapter {
      */
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        System.out.println(">>>>>>>>>>channelRead");
         //        ByteBuf m = (ByteBuf) msg;
         //
         //        try {
@@ -36,7 +41,7 @@ public class TimeClientHandler extends ChannelHandlerAdapter {
         //            m.release();
         //        }
         UnixTime m = (UnixTime) msg;
-        System.out.println(String.format("m%s", m.toString()));
+        System.out.println(String.format("%s", m.toString()));
         ctx.close();
     }
 

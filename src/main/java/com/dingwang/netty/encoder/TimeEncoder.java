@@ -29,6 +29,9 @@ public class TimeEncoder extends ChannelHandlerAdapter {
     @Override
     public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
         System.out.println("2222222222222");
+
+        System.out.println(msg.toString());
+        msg = new UnixTime();
         UnixTime m = (UnixTime) msg;
         ByteBuf encoded = ctx.alloc().buffer(4);
         encoded.writeInt(m.getValue());

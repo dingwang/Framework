@@ -7,8 +7,9 @@
  */
 package com.dingwang.netty.client;
 
-import com.dingwang.netty.decoder.TimeDecoder;
-import com.dingwang.netty.handler.TimeClientHandler;
+import com.dingwang.netty.decoder.PersonDecoder;
+import com.dingwang.netty.encoder.PersonEncoder;
+import com.dingwang.netty.handler.PersonInHandler;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -24,19 +25,19 @@ import io.netty.channel.socket.nio.NioSocketChannel;
  * 
  * @author wangding_91@163.com 2016年2月18日 下午4:37:39
  */
-public class DiscardClient {
+public class PersonClient {
 
     private int    port;
 
     private String host;
 
-    public DiscardClient(int port, String host) {
+    public PersonClient(int port, String host) {
         this.port = port;
         this.host = host;
     }
 
     public void run() {
-        EventLoopGroup workerGroup = new NioEventLoopGroup();
+        EventLoopGroup workerGroup = new NioEventLoopGroup(10);
 
         //BootStrap和ServerBootstrap类似,不过他是对非服务端的channel而言，比如客户端或者无连接传输模式的channel。
         Bootstrap b = new Bootstrap();
@@ -54,7 +55,7 @@ public class DiscardClient {
 
             @Override
             protected void initChannel(SocketChannel ch) throws Exception {
-                ch.pipeline().addLast(new TimeDecoder(), new TimeClientHandler());
+                ch.pipeline().addLast(new PersonEncoder(), new PersonDecoder(), new PersonInHandler());
             }
         });
 
@@ -62,12 +63,21 @@ public class DiscardClient {
         try {
             //我们用connect()方法代替了bind()方法。
             f = b.connect(host, port).sync();
-            f.channel().writeAndFlush("dddddd");
-            f.channel().closeFuture().sync();
+            ChannelPool.setChannel(f.channel());
+            //            Person p = new Person();
+            //            p.setAge(10);
+            //            p.setName("dw");
+            //            f.channel().writeAndFlush(p);
+
+            //            Thread.currentThread().sleep(1000);
+            //
+            //            p.setName("test");
+            //            f.channel().writeAndFlush(p);
+            //            f.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
-            workerGroup.shutdownGracefully();
+            //            workerGroup.shutdownGracefully();
         }
     }
 
